@@ -6,20 +6,9 @@
   vars:
     ansible_user: jenkins
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    
+  - name: Execute the copy-ssh-key.sh script
+      command: /home/{{ ansible_user }}/copy-ssh-key.sh
+      become_user: "{{ ansible_user }}"
 
-  tasks:
-    - name: Ensure the .ssh directory exists
-      file:
-        path: /home/{{ ansible_user }}/.ssh
-        state: directory
-        mode: '0700'
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
-
-    - name: Copy the SSH public key to the authorized_keys file
-      copy:
-        src: /var/lib/jenkins/.ssh/id_rsa.pub
-        dest: /home/{{ ansible_user }}/.ssh/authorized_keys
-        mode: '0600'
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
+ 
