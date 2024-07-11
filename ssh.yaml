@@ -1,0 +1,15 @@
+---
+- name: copy ssh pub key and set up authentication
+  hosts: all
+  become: yes
+  
+  tasks:
+    - name: checking ssh directory
+      file: 
+        path: /var/lib/jenkins/.ssh
+        state: directory
+        mode: '0700'
+    - name: copy ssh to authorized key file
+      copy:
+        src: /var/lib/jenkins/.ssh/id_rsa.pub
+        dest: /root/.ssh/authorized_keys
