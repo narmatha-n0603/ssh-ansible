@@ -7,6 +7,8 @@
     ansible_user: jenkins
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
     
-- name: Execute the copy-ssh-key.sh script
-  command: /home/{{ ansible_user }}/copy-ssh-key.sh
- 
+  tasks:
+    - name: Install Git
+      apt:
+        name: git
+        state: present
