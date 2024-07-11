@@ -2,7 +2,8 @@
 - name: copy ssh pub key and set up authentication
   hosts: all
   become: yes
-  
+  vars:
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   tasks:
     - name: checking ssh directory
       file: 
