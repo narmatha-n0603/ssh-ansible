@@ -1,16 +1,25 @@
 ---
-- name: copy ssh pub key and set up authentication
+- name: Copy SSH public key and set up SSH authentication
   hosts: all
   become: yes
+
   vars:
-    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    ansible_user: jenkins
+     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+
   tasks:
-    - name: checking ssh directory
-      file: 
-        path: /var/lib/jenkins/.ssh
+    - name: Ensure the .ssh directory exists
+      file:
+        path: /home/{{ ansible_user }}/.ssh
         state: directory
         mode: '0700'
-    - name: copy ssh to authorized key file
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+
+    - name: Copy the SSH public key to the authorized_keys file
       copy:
         src: /var/lib/jenkins/.ssh/id_rsa.pub
-        dest: /root/.ssh/authorized_keys
+        dest: /home/{{ ansible_user }}/.ssh/authorized_keys
+        mode: '0600'
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
