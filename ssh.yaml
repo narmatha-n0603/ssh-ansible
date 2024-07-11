@@ -1,6 +1,6 @@
 ---
 - name: Copy SSH public key and set up SSH authentication
-  hosts: all
+  hosts: tag.check
   become: yes
 
   vars:
