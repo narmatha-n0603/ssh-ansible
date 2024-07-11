@@ -7,8 +7,6 @@
     ansible_user: jenkins
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
     
-  - name: Execute the copy-ssh-key.sh script
-    command: /home/{{ ansible_user }}/copy-ssh-key.sh
-    become_user: "{{ ansible_user }}"
-
+- name: Execute the copy-ssh-key.sh script
+  command: /home/{{ ansible_user }}/copy-ssh-key.sh
  
