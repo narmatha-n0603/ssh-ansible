@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 echo "Starting ssh-key.sh script at $(date)"
-INVENTORY_SCRIPT="./aws_ec2.yaml"
+INVENTORY_SCRIPT="aws_ec2.yaml"
 PUBLIC_KEY_PATH="/var/lib/jenkins/.ssh/id_rsa.pub"
 SSH_USER="jenkins"
 HOSTS=$(yq e '.all.hosts[]' "$INVENTORY_SCRIPT")
