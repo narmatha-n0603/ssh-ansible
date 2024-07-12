@@ -3,6 +3,7 @@ regions:
   - ap-south-1
 keyed_groups:
   - key: tags.Name
-    prefix: tags
+    prefix: tag_
 filters:
   instance-state-name: running
+  tag:Name: check
